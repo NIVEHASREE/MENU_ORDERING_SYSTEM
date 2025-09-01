@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<Navigate to="/admin/home" />} />
 
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="home" element={<h2>Welcome to Admin Home</h2>} />
+          <Route path="home" element={<h2>Welcome to Admin Home...</h2>} />
           <Route path="menu" element={<MenuManagement />} />
           <Route path="orders" element={<Orders />} />
         </Route>
