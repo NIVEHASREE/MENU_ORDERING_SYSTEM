@@ -53,43 +53,52 @@ function Orders() {
         </thead>
         <tbody>
           {orders.map((o) => {
-            const items = Array.isArray(o.items)
-              ? o.items
-              : JSON.parse(o.items || "[]");
+  const items = Array.isArray(o.items)
+    ? o.items
+    : JSON.parse(o.items || "[]");
 
+  // 🔹 Merge duplicates by name
+  const mergedItems = items.reduce((acc, item) => {
+    const existing = acc.find((i) => i.name === item.name);
+    if (existing) {
+      existing.quantity += item.quantity; // add quantity
+    } else {
+      acc.push({ ...item });
+    }
+    return acc;
+  }, []);
+
+  return (
+    <tr key={o.id}>
+      <td>{o.table_id}</td>
+      <td>
+        <ul>
+          {mergedItems.map((item, idx) => {
+            const isServed = servedItems[o.id]?.[item.name] || false;
             return (
-              <tr key={o.id}>
-                <td>{o.table_id}</td>
-                <td>
-                  <ul>
-                    {items.map((item, idx) => {
-                      const isServed =
-                        servedItems[o.id]?.[item.name] || false;
-                      return (
-                        <li
-                          key={idx}
-                          style={{
-                            textDecoration: isServed ? "line-through" : "none",
-                            color: isServed ? "green" : "black",
-                          }}
-                        >
-                          {item.name} - {item.quantity}{" "}
-                          <button
-                            onClick={() => toggleServed(o.id, item.name)}
-                          >
-                            {isServed ? "Undo" : "Mark Served"}
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </td>
-                <td>
-                  <button onClick={() => closeBill(o)}>Close Bill</button>
-                </td>
-              </tr>
+              <li
+                key={idx}
+                style={{
+                  textDecoration: isServed ? "line-through" : "none",
+                  color: isServed ? "green" : "black",
+                }}
+              >
+                {item.name} - {item.quantity}{" "}
+                <button onClick={() => toggleServed(o.id, item.name)}>
+                  {isServed ? "Undo" : "Mark Served"}
+                </button>
+              </li>
             );
           })}
+        </ul>
+      </td>
+      <td>
+        <button onClick={() => closeBill(o)}>Close Bill</button>
+      </td>
+    </tr>
+  );
+})}
+
         </tbody>
       </table>
     </div>
