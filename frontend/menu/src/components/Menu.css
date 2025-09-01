@@ -1,0 +1,234 @@
+.menu-management {
+  background: white;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.menu-management h2 {
+  color: #1a365d;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.75rem;
+}
+
+.add-menu-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.add-menu-item input {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #2d3748;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+.add-menu-item input:focus {
+  outline: none;
+  border-color: #319795;
+  box-shadow: 0 0 0 3px rgba(49, 151, 149, 0.1);
+}
+
+.add-menu-item button {
+  background: #319795;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: flex-end;
+}
+
+.add-menu-item button:hover {
+  background: #2c7a7b;
+}
+
+.menu-management table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.menu-management th {
+  background: #1a365d;
+  color: white;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.menu-management td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.menu-management tr:last-child td {
+  border-bottom: none;
+}
+
+.menu-management tr:hover {
+  background: #f7fafc;
+}
+
+.menu-management img {
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.menu-management input[type="text"],
+.menu-management input[type="number"] {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #319795;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #2d3748;
+}
+
+.menu-management input[type="text"]:focus,
+.menu-management input[type="number"]:focus {
+  outline: none;
+  border-color: #2c7a7b;
+  box-shadow: 0 0 0 3px rgba(49, 151, 149, 0.1);
+}
+
+.menu-management td button {
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.btn-edit {
+  background: #4299e1;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #3182ce;
+}
+
+.btn-save {
+  background: #38a169;
+  color: white;
+}
+
+.btn-save:hover {
+  background: #2f855a;
+}
+
+.btn-cancel {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.btn-cancel:hover {
+  background: #e2e8f0;
+}
+
+.btn-delete {
+  background: #e53e3e;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c53030;
+}
+
+.delete-confirm-box {
+  position: absolute;
+  top: 0; 
+  right: 0; 
+  transform: translateY(-100%);
+  margin-top: -10px;
+  padding: 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100; 
+  text-align: center;
+  width: 220px; 
+  min-height: 100px;
+}
+
+.delete-confirm-box p {
+  margin-bottom: 0.75rem;
+  color: #2d3748;
+  font-size: 0.9rem;
+}
+
+.delete-confirm-box button {
+  padding: 0.4rem 0.8rem;
+  margin: 0 0.25rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.delete-confirm-box::after {
+  content: '';
+  position: absolute;
+  top: 100%; 
+  right: 20px; 
+  border-width: 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+  filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.1)); 
+}
+
+@media (max-width: 768px) {
+  .add-menu-item {
+    flex-direction: column;
+  }
+  
+  .add-menu-item input {
+    min-width: 100%;
+  }
+  
+  .menu-management table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .menu-management th,
+  .menu-management td {
+    padding: 0.5rem;
+  }
+  
+  .delete-confirm-box {
+    width: 180px;
+    right: -10px;
+  }
+}
