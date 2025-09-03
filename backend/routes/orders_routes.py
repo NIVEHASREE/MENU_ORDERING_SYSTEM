@@ -10,17 +10,27 @@ def active_orders():
     orders = conn.execute("SELECT * FROM orders WHERE status='open'").fetchall()
     return jsonify([dict(row) for row in orders])
 
-'''@orders_bp.route("/close", methods=["POST"])
+@orders_bp.route("/close", methods=["POST"])
 def close_order():
     table_id = request.json.get("tableId")
     conn = get_db()
-    # move to bills
-    order = conn.execute("SELECT * FROM orders WHERE table_id=? AND status='open'",(table_id,)).fetchone()
+    order = conn.execute(
+        "SELECT * FROM orders WHERE table_id=? AND status='open'", 
+        (table_id,)
+    ).fetchone()
+
     if order:
-        conn.execute("INSERT INTO bills (table_id, items) VALUES (?,?)",(order["table_id"], order["items"]))
-        conn.execute("DELETE FROM orders WHERE id=?",(order["id"],))
+        conn.execute(
+            "INSERT INTO bills (table_id, items) VALUES (?, ?)",
+            (order["table_id"], order["items"])
+        )
+        conn.execute("DELETE FROM orders WHERE id=?", (order["id"],))
         conn.commit()
-    return jsonify({"message":"Bill closed and saved"})'''
+
+        return jsonify({"message": "Bill closed and saved"})
+    else:
+        return jsonify({"message": "No open order found"}), 404
+
 
 @orders_bp.route("/", methods=["POST"])
 def create_or_update_order():
@@ -35,10 +45,19 @@ def create_or_update_order():
 
     if existing_order:
         old_items = json.loads(existing_order["items"])
-        merged_items = old_items + items 
+        for new_item in items:
+            found = False
+            for old_item in old_items:
+                if old_item["name"] == new_item["name"]:
+                    old_item["quantity"] += new_item["quantity"]
+                    found = True
+                    break
+            if not found:
+                old_items.append(new_item)
+
         conn.execute(
             "UPDATE orders SET items=? WHERE id=?",
-            (json.dumps(merged_items), existing_order["id"])
+            (json.dumps(old_items), existing_order["id"])
         )
     else:
         conn.execute(
@@ -47,4 +66,5 @@ def create_or_update_order():
         )
 
     conn.commit()
-    return jsonify({"message": "Order placed/updated successfully"})
+
+    return jsonify({"message": "Order placed/updated successfully"}) 

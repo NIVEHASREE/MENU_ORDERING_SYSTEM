@@ -3,7 +3,7 @@ import "./Orders.css";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const [servedItems, setServedItems] = useState({}); // track served items
+  const [servedItems, setServedItems] = useState({}); 
 
   useEffect(() => {
     fetchOrders();
@@ -57,11 +57,10 @@ function Orders() {
     ? o.items
     : JSON.parse(o.items || "[]");
 
-  // 🔹 Merge duplicates by name
   const mergedItems = items.reduce((acc, item) => {
     const existing = acc.find((i) => i.name === item.name);
     if (existing) {
-      existing.quantity += item.quantity; // add quantity
+      existing.quantity += item.quantity; 
     } else {
       acc.push({ ...item });
     }
@@ -96,8 +95,8 @@ function Orders() {
         <button onClick={() => closeBill(o)}>Close Bill</button>
       </td>
     </tr>
-  );
-})}
+      );
+    })}
 
         </tbody>
       </table>
