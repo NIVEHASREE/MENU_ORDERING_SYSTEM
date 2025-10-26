@@ -4,6 +4,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import MenuManagement from "./components/MenuManagement";
 import Orders from "./components/Orders";
 import Menu from "./components/Menu"; 
+import HomePage from "./components/HomePage";
 import "./App.css";
 
 function AdminLayout() {
@@ -24,7 +25,7 @@ function App() {
         <Route path="/" element={<Navigate to="/admin/home" />} />
 
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="home" element={<h2>Welcome to Admin Home...</h2>} />
+          <Route path="home" element={<HomePage/>} />
           <Route path="menu" element={<MenuManagement />} />
           <Route path="orders" element={<Orders />} />
         </Route>

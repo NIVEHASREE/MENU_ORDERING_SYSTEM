@@ -304,3 +304,157 @@ button {
   border-radius: 10px;
   margin-bottom: 10px;
 }
+
+
+/* Dashboard Container */
+.dashboard-container {
+  width: 90%;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.dashboard-title:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 2px;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.summary-card {
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 25px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  border-top: 4px solid #3498db;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+}
+
+.summary-card:nth-child(1) {
+  border-top-color: #3498db;
+}
+
+.summary-card:nth-child(2) {
+  border-top-color: #2ecc71;
+}
+
+.summary-card:nth-child(3) {
+  border-top-color: #e74c3c;
+}
+
+.summary-card:nth-child(4) {
+  border-top-color: #f39c12;
+}
+
+.summary-card h3 {
+  margin: 0 0 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.summary-value {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* Charts Container */
+.charts-container {
+  margin: 40px 0;
+}
+
+.chart-wrapper {
+  width: 100%;
+  margin-bottom: 50px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.chart-title {
+  margin: 0 0 20px;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.no-data {
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+  padding: 20px;
+}
+
+/* Pie Chart Container - This controls the size of the pie chart */
+.pie-chart-container {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    width: 95%;
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+  }
+  
+  .summary-card {
+    min-width: 150px;
+    padding: 20px;
+  }
+  
+  .summary-value {
+    font-size: 1.5rem;
+  }
+  
+  .pie-chart-container {
+    width: 250px;
+    height: 250px;
+  }
+}

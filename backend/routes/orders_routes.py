@@ -20,17 +20,21 @@ def close_order():
     ).fetchone()
 
     if order:
+        items = json.loads(order["items"])
+        total_amount = sum(item.get("price", 0) * item.get("quantity", 0) for item in items)
+
         conn.execute(
-            "INSERT INTO bills (table_id, items) VALUES (?, ?)",
-            (order["table_id"], order["items"])
+            "INSERT INTO bills (table_id, items, total_amount) VALUES (?, ?, ?)",
+            (order["table_id"], order["items"], total_amount)
         )
+
+        # Delete the closed order
         conn.execute("DELETE FROM orders WHERE id=?", (order["id"],))
         conn.commit()
 
-        return jsonify({"message": "Bill closed and saved"})
+        return jsonify({"message": "Bill closed and saved", "total_amount": total_amount})
     else:
         return jsonify({"message": "No open order found"}), 404
-
 
 @orders_bp.route("/", methods=["POST"])
 def create_or_update_order():
@@ -67,4 +71,10 @@ def create_or_update_order():
 
     conn.commit()
 
-    return jsonify({"message": "Order placed/updated successfully"}) 
+    return jsonify({"message": "Order placed/updated successfully"})
+
+@orders_bp.route("/bills", methods=["GET"])
+def get_bills():
+    conn = get_db()
+    bills = conn.execute("SELECT * FROM bills").fetchall()
+    return jsonify([dict(row) for row in bills])
